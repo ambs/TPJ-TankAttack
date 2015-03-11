@@ -41,11 +41,13 @@ namespace TPJ_TankAttack
             spriteBatch = new SpriteBatch(GraphicsDevice);
             scene = new Scene(spriteBatch);
 
-            scene.AddSprite(new Sprite(Content, "tank_body"));
+            scene.AddSprite(new Tank(Content));
         }
 
         protected override void UnloadContent()
         {
+            spriteBatch.Dispose();
+            scene.Dispose();
         }
 
         protected override void Update(GameTime gameTime)

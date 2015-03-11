@@ -45,5 +45,13 @@ namespace TPJ_TankAttack
             }
         }
 
+
+        public void Dispose()
+        {
+            foreach (var sprite in sprites)
+            {
+                sprite.Dispose();
+            }
+        }
     }
 }

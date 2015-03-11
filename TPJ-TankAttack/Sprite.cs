@@ -13,10 +13,10 @@ namespace TPJ_TankAttack
     class Sprite
     {
         private Texture2D image;
-        private Vector2 position;
+        protected Vector2 position;
         private Vector2 size;
         private float rotation;
-        private Scene scene;
+        protected Scene scene;
 
         public Sprite(ContentManager contents, String assetName)
         {
@@ -26,17 +26,27 @@ namespace TPJ_TankAttack
             this.image = contents.Load<Texture2D>(assetName);
         }
 
-        public void SetScene(Scene s)
+        public virtual void SetScene(Scene s)
         {
             this.scene = s;
         }
 
-        public void Draw(GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
             Rectangle pos = Camera.WorldSize2PixelRectangle(this.position, this.size);
             scene.SpriteBatch.Draw(this.image, pos, Color.White);
         }
 
-        public void Update(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime) { }
+
+        public virtual void Dispose()
+        {
+            this.image.Dispose();
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
+        }
     }
 }
