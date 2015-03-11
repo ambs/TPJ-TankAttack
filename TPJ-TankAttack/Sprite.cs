@@ -1,10 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿#region Using statements
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#endregion
 
 namespace TPJ_TankAttack
 {
@@ -14,6 +16,7 @@ namespace TPJ_TankAttack
         private Vector2 position;
         private Vector2 size;
         private float rotation;
+        private Scene scene;
 
         public Sprite(ContentManager contents, String assetName)
         {
@@ -23,10 +26,17 @@ namespace TPJ_TankAttack
             this.image = contents.Load<Texture2D>(assetName);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void SetScene(Scene s)
+        {
+            this.scene = s;
+        }
+
+        public void Draw(GameTime gameTime)
         {
             Rectangle pos = Camera.WorldSize2PixelRectangle(this.position, this.size);
-            spriteBatch.Draw(this.image, pos, Color.White);
+            scene.SpriteBatch.Draw(this.image, pos, Color.White);
         }
+
+        public void Update(GameTime gameTime) { }
     }
 }

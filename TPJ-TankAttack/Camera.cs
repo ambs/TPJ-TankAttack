@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿#region Using Statements
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#endregion
 
 namespace TPJ_TankAttack
 {
@@ -58,6 +60,7 @@ namespace TPJ_TankAttack
 
             return pixelPoint;
         }
+
         public static Rectangle WorldSize2PixelRectangle(Vector2 pos, Vector2 size)
         {
             Camera.UpdateRatio();
