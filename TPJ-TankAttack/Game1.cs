@@ -41,6 +41,9 @@ namespace TPJ_TankAttack
             spriteBatch = new SpriteBatch(GraphicsDevice);
             scene = new Scene(spriteBatch);
 
+            scene.AddSprite(
+                new Sprite(Content, "sand").Scl(Camera.worldWidth).
+                At(new Vector2(0f, 4600 * Camera.worldWidth / 600)));
             scene.AddSprite(new Tank(Content));
         }
 

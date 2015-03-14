@@ -11,8 +11,8 @@ namespace TPJ_TankAttack
     static class Camera
     {
         private static GraphicsDeviceManager gDevManager;
-        private static float worldWidth;
-        private static float ratio;
+        public static float worldWidth { private set; get; }
+        public static float ratio      { private set; get; }
         private static Vector2 target;
         private static int lastSeenPixelWidth = 0;
 
@@ -68,9 +68,6 @@ namespace TPJ_TankAttack
             Vector2 pixelPos = WorldPoint2Pixels(pos);
             int pixelWidth = (int)( size.X * Camera.ratio + .5f);
             int pixelHeight = (int)(size.Y * Camera.ratio + .5f);
-
-            pixelPos.X -= pixelWidth / 2;
-            pixelPos.Y -= pixelHeight / 2;
 
             return new Rectangle((int)pixelPos.X, (int)pixelPos.Y, pixelWidth, pixelHeight);
         }

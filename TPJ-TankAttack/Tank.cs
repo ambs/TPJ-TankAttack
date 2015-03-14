@@ -14,7 +14,8 @@ namespace TPJ_TankAttack
 
         public Tank(ContentManager content) : base(content, "tank_body")
         {
-            this.turret = new Sprite(content, "tank_turret"); 
+            this.turret = new Sprite(content, "tank_turret");
+            this.turret.SetRotation((float)Math.PI / 4);
         }
 
         public override void Draw(GameTime gameTime)
@@ -34,13 +35,12 @@ namespace TPJ_TankAttack
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.W))
                 this.position.Y += 0.01f;
-            
+
             if (state.IsKeyDown(Keys.S))
                 this.position.Y -= 0.01f;
 
-
-
             turret.SetPosition(this.position);
+            Camera.SetTarget(this.position);
 
             turret.Update(gameTime);
             base.Update(gameTime);
