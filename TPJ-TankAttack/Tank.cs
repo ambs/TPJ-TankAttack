@@ -32,6 +32,16 @@ namespace TPJ_TankAttack
 
         public override void Update(GameTime gameTime)
         {
+            MouseState mstate = Mouse.GetState();
+            Point mpos = mstate.Position;
+
+            Vector2 tpos = Camera.WorldPoint2Pixels(position);
+            float a = (float) mpos.Y - tpos.Y;
+            float l = (float)mpos.X - tpos.X;
+            float rot = (float)Math.Atan2(a, l);
+            
+            turret.SetRotation(rot+(float)Math.PI/2f);
+
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.W))
                 this.position.Y += 0.01f;

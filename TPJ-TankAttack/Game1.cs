@@ -45,7 +45,8 @@ namespace TPJ_TankAttack
                 new Sprite(Content, "sand").Scl(Camera.worldWidth).
                 At(new Vector2(0f, 4600 * Camera.worldWidth / 600)));
             scene.AddSprite(new Tank(Content));
-        }
+            scene.AddSprite(new Soldier(Content));
+            }
 
         protected override void UnloadContent()
         {

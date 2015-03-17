@@ -14,15 +14,17 @@ namespace TPJ_TankAttack
     {
         private Texture2D image;
         protected Vector2 position;
-        private Vector2 size;
+        protected Vector2 size;
         private float rotation;
         protected Scene scene;
-
+        protected Vector2 pixelsize;
+        protected Rectangle? source = null;
         public Sprite(ContentManager contents, String assetName)
         {
             this.rotation = 0f;
             this.position = Vector2.Zero;
             this.image = contents.Load<Texture2D>(assetName);
+            this.pixelsize = new Vector2(image.Width, image.Height);
             this.size = new Vector2(1f, (float)image.Height / (float)image.Width);
         }
 
@@ -46,8 +48,8 @@ namespace TPJ_TankAttack
         {
             Rectangle pos = Camera.WorldSize2PixelRectangle(this.position, this.size);
            // scene.SpriteBatch.Draw(this.image, pos, Color.White);
-            scene.SpriteBatch.Draw(this.image, pos, null, Color.White,
-                this.rotation, new Vector2(image.Width / 2, image.Height / 2),
+            scene.SpriteBatch.Draw(this.image, pos, source, Color.White,
+                this.rotation, new Vector2(pixelsize.X/ 2, pixelsize.Y / 2),
                 SpriteEffects.None, 0);
         }
 
