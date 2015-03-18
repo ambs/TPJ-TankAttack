@@ -69,5 +69,18 @@ namespace TPJ_TankAttack
 
             base.Draw(gameTime);
         }
+
+        public override void EnableCollisions()
+        {
+            this.HasCollisions = true;
+            pixels = new Color[(int)(pixelsize.X * pixelsize.Y)];
+            image.GetData<Color>(0, new Rectangle(
+                    (int)(currentFrame.X * pixelsize.X),
+                    (int)(currentFrame.Y * pixelsize.Y), 
+                    (int)pixelsize.X,
+                    (int)pixelsize.Y),
+                 pixels, 0, 
+                (int)(pixelsize.X * pixelsize.Y));
+        }
     }
 }
