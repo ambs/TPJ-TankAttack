@@ -16,6 +16,7 @@ namespace TPJ_TankAttack
         {
             this.turret = new Sprite(content, "tank_turret");
             this.turret.SetRotation((float)Math.PI / 4);
+            this.EnableCollisions();
         }
 
         public override void Draw(GameTime gameTime)
@@ -42,12 +43,29 @@ namespace TPJ_TankAttack
             
             turret.SetRotation(rot+(float)Math.PI/2f);
 
+
+
+
             KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Keys.W))
+            {
                 this.position.Y += 0.01f;
-
+                Sprite other;
+                Vector2 colPosition;
+                if (scene.Collides(this, out other, out colPosition))
+                    this.position.Y -= 0.01f;
+            }
             if (state.IsKeyDown(Keys.S))
+            {
                 this.position.Y -= 0.01f;
+                Sprite other;
+                Vector2 colPosition;
+                if (scene.Collides(this, out other, out colPosition))
+                    this.position.Y += 0.01f;
+            }
+
+
+
 
             turret.SetPosition(this.position);
             Camera.SetTarget(this.position);

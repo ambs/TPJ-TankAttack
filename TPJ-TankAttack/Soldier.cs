@@ -11,6 +11,7 @@ namespace TPJ_TankAttack
         public Soldier(ContentManager content): base(content, "soldado",1,3)
         {
             this.Scale(0.2f);
+            this.EnableCollisions();
         }
     }
 }

@@ -45,6 +45,25 @@ namespace TPJ_TankAttack
             }
         }
 
+        public bool Collides(Sprite s, out Sprite collided,
+                                       out Vector2 collisionPoint)
+        {
+            bool collisionExists = false;
+            collided = s;  // para calar o compilador
+            collisionPoint = Vector2.Zero; // para calar o compilador
+
+            foreach (var sprite in sprites)
+            {
+                if (s == sprite) continue;
+                if (s.CollidesWith(sprite, out collisionPoint))
+                {
+                    collisionExists = true;
+                    collided = sprite;
+                    break;
+                }
+            }
+            return collisionExists;
+        }
 
         public void Dispose()
         {

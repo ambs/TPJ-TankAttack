@@ -16,6 +16,7 @@ namespace TPJ_TankAttack
 
         protected Texture2D image;
         protected Vector2 position;
+        protected float radius; // raio da "bounding box"
         protected Vector2 size;
         private float rotation;
         protected Scene scene;
@@ -33,9 +34,28 @@ namespace TPJ_TankAttack
             this.size = new Vector2(1f, (float)image.Height / (float)image.Width);
         }
 
+        // Se houver colisao, collisionPoint é o ponto de colisão
+        // se não houver, collisionPoint deve ser ignorado!
+        public bool CollidesWith(Sprite other, out Vector2 collisionPoint)
+        {
+            collisionPoint = position; // Calar o compilador
+
+            if (!this.HasCollisions)  return false;
+            if (!other.HasCollisions) return false;
+
+            float distance = (this.position - other.position).Length();
+
+            if (distance > this.radius + other.radius) return false;
+            
+            return this.PixelTouches(other, out collisionPoint);
+        }
+
         public virtual void EnableCollisions()
         {
             this.HasCollisions = true;
+            this.radius = (float) Math.Sqrt( Math.Pow(size.X / 2, 2) +
+                                             Math.Pow(size.Y / 2, 2) );
+
             pixels = new Color[(int)(pixelsize.X * pixelsize.Y)];
             image.GetData<Color>(pixels);
         }

@@ -73,6 +73,10 @@ namespace TPJ_TankAttack
         public override void EnableCollisions()
         {
             this.HasCollisions = true;
+
+            this.radius = (float)Math.Sqrt(Math.Pow(size.X / 2, 2) +
+                                           Math.Pow(size.Y / 2, 2));
+
             pixels = new Color[(int)(pixelsize.X * pixelsize.Y)];
             image.GetData<Color>(0, new Rectangle(
                     (int)(currentFrame.X * pixelsize.X),
