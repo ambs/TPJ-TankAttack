@@ -24,9 +24,14 @@ namespace TPJ_TankAttack
             s.SetScene(this);
         }
 
+        public void RemoveSprite(Sprite s)
+        {
+            this.sprites.Remove(s);
+        }
+
         public void Update(GameTime gameTime)
         {
-            foreach (var sprite in sprites)
+            foreach (var sprite in sprites.ToList())
             {
                 sprite.Update(gameTime);
             }

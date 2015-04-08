@@ -18,14 +18,15 @@ namespace TPJ_TankAttack
         protected Vector2 position;
         protected float radius; // raio da "bounding box"
         protected Vector2 size;
-        private float rotation;
+        protected float rotation;
         protected Scene scene;
         protected Vector2 pixelsize;
         protected Rectangle? source = null;
         protected Color[] pixels;
-
+        protected ContentManager cManager;
         public Sprite(ContentManager contents, String assetName)
         {
+            this.cManager = contents;
             this.HasCollisions = false;
             this.rotation = 0f;
             this.position = Vector2.Zero;
@@ -106,7 +107,8 @@ namespace TPJ_TankAttack
                         Vector2 otherPixel = other.VirtualWorldPointToImagePixel(CollidePoint);
 
                         if (otherPixel.X >= 0 && otherPixel.Y >= 0 &&
-                            otherPixel.X < other.size.X && otherPixel.Y < other.size.Y)
+                            otherPixel.X < other.pixelsize.X &&
+                            otherPixel.Y < other.pixelsize.Y)
                         {
                             if (other.GetColorAt((int)otherPixel.X, (int)otherPixel.Y).A > 0)
                             {
@@ -158,6 +160,11 @@ namespace TPJ_TankAttack
         public virtual void Dispose()
         {
             this.image.Dispose();
+        }
+
+        public void Destroy()
+        {
+            this.scene.RemoveSprite(this);
         }
 
         public void SetPosition(Vector2 position)

@@ -11,6 +11,8 @@ namespace TPJ_TankAttack
     class Tank : Sprite
     {
         private Sprite turret;
+        private float fireInterval = 0.5f;
+        private float fireCounter = 0f;
 
         public Tank(ContentManager content) : base(content, "tank_body")
         {
@@ -40,10 +42,20 @@ namespace TPJ_TankAttack
             float a = (float) mpos.Y - tpos.Y;
             float l = (float)mpos.X - tpos.X;
             float rot = (float)Math.Atan2(a, l);
-            
-            turret.SetRotation(rot+(float)Math.PI/2f);
+            rot += (float)Math.PI/2f;
+            turret.SetRotation(rot);
 
-
+            fireCounter += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (fireCounter >= fireInterval &&
+                mstate.LeftButton == ButtonState.Pressed)
+            {
+                Vector2 pos = this.position 
+                         + new Vector2((float)Math.Sin(rot) * size.Y/2,
+                                       (float)Math.Cos(rot) * size.Y/2);
+                Bullet bullet = new Bullet(cManager, pos, rot);
+                scene.AddSprite(bullet);
+                fireCounter = 0f;
+            }
 
 
             KeyboardState state = Keyboard.GetState();
