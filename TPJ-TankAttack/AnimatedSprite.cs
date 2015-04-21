@@ -13,7 +13,8 @@ namespace TPJ_TankAttack
         private Point currentFrame;
         private float animationInterval = 1f / 20f;
         private float animationTimer = 0f;
-        
+
+        public bool Loop { get; set; }
 
         public AnimatedSprite(ContentManager content, 
             string filename, int nrows, int ncols):
@@ -26,10 +27,9 @@ namespace TPJ_TankAttack
             this.size = new Vector2(1f, 
                 (float)pixelsize.Y / (float)pixelsize.X);
             this.currentFrame = Point.Zero;
-
-
-
+            Loop = true;
         }
+
         private void nextFrame()
         {
             if(currentFrame.X < ncols - 1)
@@ -41,9 +41,13 @@ namespace TPJ_TankAttack
                 currentFrame.X = 0;
                 currentFrame.Y++;
             }
-            else
+            else if (Loop)
             {
                 currentFrame = Point.Zero;
+            }
+            else
+            {
+                Destroy();
             }
         }
 

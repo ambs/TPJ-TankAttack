@@ -39,5 +39,19 @@ namespace TPJ_TankAttack
 
             base.Update(gameTime);
         }
+
+        public override void Destroy()
+        {
+            AnimatedSprite explosion;
+            explosion = new AnimatedSprite(cManager, "explosion", 1, 12);
+            scene.AddSprite(explosion);
+            explosion.SetPosition(this.position);
+            explosion.Scale(.3f);
+            explosion.Loop = false;
+            base.Destroy();
+        }
+
+
+
     }
 }

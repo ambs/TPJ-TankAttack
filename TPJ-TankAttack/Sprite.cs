@@ -162,7 +162,7 @@ namespace TPJ_TankAttack
             this.image.Dispose();
         }
 
-        public void Destroy()
+        public virtual void Destroy()
         {
             this.scene.RemoveSprite(this);
         }

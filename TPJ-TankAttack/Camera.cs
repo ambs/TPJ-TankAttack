@@ -71,5 +71,10 @@ namespace TPJ_TankAttack
 
             return new Rectangle((int)pixelPos.X, (int)pixelPos.Y, pixelWidth, pixelHeight);
         }
+
+        public static Vector2 GetTarget()
+        {
+            return Camera.target;
+        }
     }
 }

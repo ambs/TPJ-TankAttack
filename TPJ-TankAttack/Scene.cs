@@ -12,16 +12,26 @@ namespace TPJ_TankAttack
         public SpriteBatch SpriteBatch {get; private set;}
         private List<Sprite> sprites;
 
+        // Background list
+        private List<SlidingBackground> backgrounds;
+
         public Scene(SpriteBatch sb)
         {
             this.SpriteBatch = sb;
             this.sprites = new List<Sprite>();
+            this.backgrounds = new List<SlidingBackground>();
         }
 
         public void AddSprite(Sprite s)
         {
             this.sprites.Add(s);
             s.SetScene(this);
+        }
+
+        public void AddBackground(SlidingBackground b)
+        {
+            this.backgrounds.Add(b);
+            b.SetScene(this);
         }
 
         public void RemoveSprite(Sprite s)
@@ -39,13 +49,17 @@ namespace TPJ_TankAttack
 
         public void Draw(GameTime gameTime)
         {
-            if (sprites.Count > 0)
+            if (sprites.Count > 0 || backgrounds.Count > 0)
             {
                 this.SpriteBatch.Begin();
+                // Desenhar os fundos!!!
+                foreach (var background in backgrounds)
+                    background.Draw(gameTime);
+                
+                // Desenhar as sprites!!!
                 foreach (var sprite in sprites)
-                {
                     sprite.Draw(gameTime);
-                }
+
                 this.SpriteBatch.End();
             }
         }
@@ -73,9 +87,10 @@ namespace TPJ_TankAttack
         public void Dispose()
         {
             foreach (var sprite in sprites)
-            {
                 sprite.Dispose();
-            }
+
+            foreach (var background in backgrounds)
+                background.Dispose();
         }
     }
 }
