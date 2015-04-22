@@ -10,7 +10,7 @@ namespace TPJ_TankAttack
 {
     static class Camera
     {
-        private static GraphicsDeviceManager gDevManager;
+        public static GraphicsDeviceManager gDevManager;
         public static float worldWidth { private set; get; }
         public static float ratio      { private set; get; }
         private static Vector2 target;
